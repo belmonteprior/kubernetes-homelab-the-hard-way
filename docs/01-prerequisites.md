@@ -1,30 +1,33 @@
-# Kubernetes The Hard Way - 01-prerequisites.md
+# Prerequisites
 
-## Prerrequisitos y Entorno Local
+In this lab you will review the machine requirements necessary to follow this tutorial.
 
-Antes de iniciar el aprovisionamiento, es obligatorio validar que el equipo anfitrión cumple con las capacidades técnicas para levantar máquinas virtuales y que cuenta con las herramientas de orquestación necesarias.
+## Virtual or Physical Machines
 
-### Comprobación de Virtualización por Hardware
-El procesador de tu equipo anfitrión debe soportar virtualización por hardware (Intel VT-x o AMD-V) y esta debe estar habilitada en la BIOS/UEFI. Puedes verificarlo con los siguientes comandos según tu sistema operativo:
+This tutorial requires four (4) virtual or physical ARM64 or AMD64 machines running Debian 12 (bookworm). The following table lists the four machines and their CPU, memory, and storage requirements.
 
-En esta guía adaptamos los prerrequisitos oficiales al uso de Multipass como entorno local en lugar de un jumpbox tradicional, manteniendo la lógica paso a paso para desplegar el clúster.
+| Name    | Description            | CPU | RAM   | Storage |
+|---------|------------------------|-----|-------|---------|
+| jumpbox | Administration host    | 1   | 512MB | 10GB    |
+| server  | Kubernetes server      | 1   | 2GB   | 20GB    |
+| node-0  | Kubernetes worker node | 1   | 2GB   | 20GB    |
+| node-1  | Kubernetes worker node | 1   | 2GB   | 20GB    |
 
-# Comprobacion virtualizacion hardware:
+How you provision the machines is up to you, the only requirement is that each machine meet the above system requirements including the machine specs and OS version. Once you have all four machines provisioned, verify the OS requirements by viewing the `/etc/os-release` file:
 
-Get-ComputerInfo | Select-Object HyperVRequirement*
+```bash
+cat /etc/os-release
+```
 
-PowerShell
-multipass version
-(Nota: En caso de no tenerlo instalado, se puede obtener desde el sitio oficial de Multipass o mediante Winget ejecutando:
-winget install Canonical.Multipass).
+You should see something similar to the following output:
 
-### Herramientas y Entorno
-Para este despliegue utilizaremos Multipass en tu máquina local para gestionar las máquinas virtuales Ubuntu 24.04, omitiendo la necesidad de configurar conexiones SSH externas complejas gracias a la gestión directa por la shell de Multipass.
+```text
+PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+NAME="Debian GNU/Linux"
+VERSION_ID="12"
+VERSION="12 (bookworm)"
+VERSION_CODENAME=bookworm
+ID=debian
+```
 
-
-Los requisitos del cluster seran en mi caso para un equipo de 8GRAM:
-
-Name	    Description	            CPU	RAM	Storage
-controller	Kubernetes server	    1	1.5GB	10GB
-worker-0    Kubernetes worker node	1	1GB	10GB
-worker-1    Kubernetes worker node	1	1GB	10GB
+Next: [setting-up-the-jumpbox](02-jumpbox.md)
