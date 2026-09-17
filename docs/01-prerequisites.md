@@ -9,6 +9,15 @@ El procesador de tu equipo anfitrión debe soportar virtualización por hardware
 
 En esta guía adaptamos los prerrequisitos oficiales al uso de Multipass como entorno local en lugar de un jumpbox tradicional, manteniendo la lógica paso a paso para desplegar el clúster.
 
+# Comprobacion virtualizacion hardware:
+
+Get-ComputerInfo | Select-Object HyperVRequirement*
+
+PowerShell
+multipass version
+(Nota: En caso de no tenerlo instalado, se puede obtener desde el sitio oficial de Multipass o mediante Winget ejecutando:
+winget install Canonical.Multipass).
+
 ### Herramientas y Entorno
 Para este despliegue utilizaremos Multipass en tu máquina local para gestionar las máquinas virtuales Ubuntu 24.04, omitiendo la necesidad de configurar conexiones SSH externas complejas gracias a la gestión directa por la shell de Multipass.
 
